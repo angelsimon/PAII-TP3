@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Parking Control</string>
+    <string name="campo_vacio">El campo no puede quedar vacío</string>
 </resources>
