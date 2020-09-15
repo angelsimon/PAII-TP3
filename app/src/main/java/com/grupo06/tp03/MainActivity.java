@@ -2,10 +2,11 @@ package com.grupo06.tp03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import classes.Validaciones;
 
@@ -20,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindControls();
         validador = new Validaciones();
+    }
+
+    public void btnRegistrarse_Click(View view){
+        Intent i = new Intent(this, RegistrarActivity.class);
+        startActivity(i);
     }
 
     private void btnIniciar_Click(){
