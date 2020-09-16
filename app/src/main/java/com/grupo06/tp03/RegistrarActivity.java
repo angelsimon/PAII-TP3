@@ -67,7 +67,7 @@ public class RegistrarActivity extends AppCompatActivity {
                     Toast.makeText(RegistrarActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
                 } else {
                     if (UsuarioController.getByUsername(txtNombreUsuario.getText().toString(), this) != null) {
-                        Toast.makeText(RegistrarActivity.this, "El nombre de usuario se encuentra repetido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrarActivity.this, this.getString(R.string.ya_existe_usuario), Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(RegistrarActivity.this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();

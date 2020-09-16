@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Parking Control</string>
-    <string name="campo_vacio">El campo no puede quedar vacío</string>
+    <string name="campos_vacios">Debe completar todos los campos</string>
+    <string name="no_existe_usuario">"No se han encontrado usuarios con esos datos"</string>
+    <!--string name="ya_existe_usuario">El nombre de usuario se encuentra repetido</string>-->
+    <string name="ya_existe_usuario">El usuario ya existe</string>
+
+    <string name="title_activity_estacionamiento">EstacionamientoActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

@@ -29,13 +29,14 @@ public class UsuarioDAO {
             throw ex;
         }
     }
-    public static ArrayList<UsuarioModel> get(String username, Context ctx){
-        try{
+
+    public static ArrayList<UsuarioModel> get(String username, Context ctx) {
+        try {
 
             DBHelper db = new DBHelper(ctx, "tp3.db", null, 1);
             db.abrir();
-            String []columnas = new String[] {"*"};
-            String []whereParams = new String[] {username};
+            String[] columnas = new String[]{"*"};
+            String[] whereParams = new String[]{username};
             Cursor c = db.select("Usuarios",
                     columnas,
                     "nombreusuario = ?",
@@ -45,7 +46,7 @@ public class UsuarioDAO {
                     null);
 
             ArrayList<UsuarioModel> lista = new ArrayList<UsuarioModel>();
-            while(c.moveToNext()){
+            while (c.moveToNext()) {
                 UsuarioModel usuario = new UsuarioModel();
                 usuario.setId(c.getLong(c.getColumnIndexOrThrow("id")));
                 usuario.setNombreusuario(c.getString(c.getColumnIndexOrThrow("nombreusuario")));
@@ -57,9 +58,31 @@ public class UsuarioDAO {
             c.close();
             db.cerrar();
             return lista;
-        }
-        catch(SQLiteException ex){
+        } catch (SQLiteException ex) {
             throw ex;
         }
     }
+
+    public static UsuarioModel get(UsuarioModel reg, Context ctx){
+        try{
+            String [] columnas = new String [] {"*"};
+            String whereClause = "nombreusuario = ? AND clave = ? AND estado = 1";
+            String [] whereParams = new String [] {reg.getNombreusuario().toString(), reg.getClave().toString()};
+
+            DBHelper db = new DBHelper(ctx, "tp3.db", null, 1);
+            db.abrir();
+            Cursor c = db.select("Usuarios", columnas, whereClause, whereParams, null, null, null);
+            while(c.moveToNext()){
+                reg.setId(c.getLong(c.getColumnIndexOrThrow("id")));
+                reg.setMail(c.getString(c.getColumnIndexOrThrow("mail")));
+            }
+            c.close();
+            db.cerrar();
+            return reg;
+        }
+        catch(SQLiteException e){
+            throw e;
+        }
+    }
+
 }

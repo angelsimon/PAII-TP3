@@ -17,6 +17,7 @@ public class UsuarioController {
             throw ex;
         }
     }
+
     public static UsuarioModel getByUsername(String username, Context ctx){
         try{
             ArrayList<UsuarioModel> lista = UsuarioDAO.get(username, ctx);
@@ -30,4 +31,14 @@ public class UsuarioController {
         }
         return null;
     }
+
+    public static UsuarioModel usuarioExiste(UsuarioModel reg, Context ctx){
+        try{
+            return UsuarioDAO.get(reg, ctx);
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
+
 }
