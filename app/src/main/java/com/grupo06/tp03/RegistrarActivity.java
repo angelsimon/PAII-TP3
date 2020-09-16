@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import classes.Validaciones;
 import controllers.UsuarioController;
 import models.UsuarioModel;
 
@@ -23,12 +24,18 @@ public class RegistrarActivity extends AppCompatActivity {
     }
 
     private boolean validate(){
-
-        if(!txtClave.getText().toString().equals(txtRepetirClave.getText().toString())){
-            Toast.makeText(this, "Las claves deben ser idénticas.", Toast.LENGTH_LONG).show();
+        if (Validaciones.esVacio(txtNombreUsuario.getText().toString())){
+            Toast.makeText(this, "El nombre de usuario no puede ser vacío", Toast.LENGTH_LONG).show();
             return false;
         }
-
+        if (!Validaciones.esMailValido(txtMail.getText().toString())){
+            Toast.makeText(this, "El mail no es correcto", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(!Validaciones.sonIguales(txtClave.getText().toString(), txtRepetirClave.getText().toString())){
+            Toast.makeText(this, "Las claves deben ser idénticas", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 
@@ -55,11 +62,18 @@ public class RegistrarActivity extends AppCompatActivity {
 
     public void btnRegistrar_Click(View view){
         try {
-            if (UsuarioController.guardar(bindData(), this)){
-                Toast.makeText(RegistrarActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(RegistrarActivity.this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
+            if (this.validate()) {
+                if (UsuarioController.guardar(bindData(), this)) {
+                    Toast.makeText(RegistrarActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (UsuarioController.getByUsername(txtNombreUsuario.getText().toString(), this) != null) {
+                        Toast.makeText(RegistrarActivity.this, "El nombre de usuario se encuentra repetido", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(RegistrarActivity.this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
             }
         }
         catch(Exception e){
