@@ -19,7 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import models.UsuarioModel;
 
-public class EstacionamientoActivity extends AppCompatActivity {
+public class AppActivity extends AppCompatActivity {
     UsuarioModel user;
     TextView lblNombreUsuario_Nav, lblMail_Nav;
     private AppBarConfiguration mAppBarConfiguration;
@@ -38,14 +38,14 @@ public class EstacionamientoActivity extends AppCompatActivity {
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+       /* FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -91,7 +91,9 @@ public class EstacionamientoActivity extends AppCompatActivity {
         catch(Exception ex){
             ex.printStackTrace();
         }
-
+    }
+    public UsuarioModel getUser(){
+        return user;
     }
 
 

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,8 +39,8 @@ public class RegistrarActivity extends AppCompatActivity {
     }
 
     private void bindControls(){
-        this.txtNombreUsuario = (EditText) findViewById(R.id.txtNombreUsuario);
-        this.txtMail = (EditText) findViewById(R.id.txtMail);
+        this.txtNombreUsuario = (EditText) findViewById(R.id.txtNombreUsuario_mc);
+        this.txtMail = (EditText) findViewById(R.id.txtMail_mc);
         this.txtClave = (EditText) findViewById(R.id.txtPassword);
         this.txtRepetirClave = (EditText) findViewById(R.id.txtRepetir);
     }

@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Objects;
-
-import classes.Validaciones;
 import controllers.UsuarioController;
 import models.UsuarioModel;
 
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 if(validate()) {
                     UsuarioModel user = UsuarioController.usuarioExiste(bindData(), this);
                     if(!(user.getId() == -1)){
-                        Intent i = new Intent(this, EstacionamientoActivity.class);
+                        Intent i = new Intent(this, AppActivity.class);
                         i.putExtra("Usuario", user);
                         startActivity(i);
                     }

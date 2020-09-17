@@ -45,7 +45,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txtNombreUsuario"
+                android:id="@+id/txtNombreUsuario_mc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -56,7 +56,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/txtMail"
+                android:id="@+id/txtMail_mc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
