@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     UsuarioModel user = UsuarioController.usuarioExiste(bindData(), this);
                     if(!(user.getId() == -1)){
                         Intent i = new Intent(this, EstacionamientoActivity.class);
+                        i.putExtra("Usuario", user);
                         startActivity(i);
                     }
                     else{

@@ -24,7 +24,6 @@ public class UsuarioController {
             if (lista.size() == 1){
                 return lista.get(0);
             }
-
         }
         catch(Exception ex) {
             return null;

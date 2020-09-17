@@ -3,6 +3,7 @@ package com.grupo06.tp03;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -16,14 +17,25 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class EstacionamientoActivity extends AppCompatActivity {
+import models.UsuarioModel;
 
+public class EstacionamientoActivity extends AppCompatActivity {
+    UsuarioModel user;
+    TextView lblNombreUsuario_Nav, lblMail_Nav;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estacionamiento);
+        bindControls();
+        // Obtener el usuario logueado
+        try {
+            user = (UsuarioModel) this.getIntent().getSerializableExtra("Usuario");
+        }
+        catch (Exception ex){
+            throw ex;
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -45,12 +57,15 @@ public class EstacionamientoActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.estacionamiento, menu);
+        bindData();
         return true;
     }
 
@@ -60,4 +75,29 @@ public class EstacionamientoActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    private void bindControls(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        lblNombreUsuario_Nav = (TextView) headerView.findViewById(R.id.lblNombreUsuario_Nav);
+        lblMail_Nav = (TextView) headerView.findViewById(R.id.lblMail_Nav);
+    }
+
+    private void bindData(){
+        try {
+            lblNombreUsuario_Nav.setText(user.getNombreusuario().toString());
+            lblMail_Nav.setText(user.getMail().toString());
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+
+
 }

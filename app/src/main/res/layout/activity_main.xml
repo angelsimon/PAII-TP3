@@ -33,7 +33,7 @@
                 android:textColor="@color/titleColor" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/lblMail_Nav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inicia sesión para empezar"
