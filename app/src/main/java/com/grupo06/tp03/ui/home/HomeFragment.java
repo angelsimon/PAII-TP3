@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -18,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.grupo06.tp03.AppActivity;
 import com.grupo06.tp03.R;
+import com.grupo06.tp03.ui.dialog.NewParkingDialogFragment;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ import models.UsuarioModel;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    FragmentManager fm = getFragmentManager();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +49,9 @@ public class HomeFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Miau", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Miau", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                NewParkingDialogFragment nuevoEst = new NewParkingDialogFragment();
+                nuevoEst.show(fm, "prueba");
             }
         });
 
