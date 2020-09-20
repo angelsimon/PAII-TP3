@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTablaUsuarios = "CREATE TABLE Usuarios (id INTEGER NOT NULL, nombreusuario TEXT NOT NULL UNIQUE, mail TEXT NOT NULL UNIQUE, clave TEXT NOT NULL, estado INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(id AUTOINCREMENT));";
         String createTablaLogins = "CREATE TABLE Logins (id INTEGER NOT NULL, idusuario INTEGER NOT NULL, fechahora INTEGER NOT NULL, FOREIGN KEY(idusuario) REFERENCES Usuarios(id), PRIMARY KEY(id AUTOINCREMENT));";
-        String createTablaEstacionamientos = "CREATE TABLE Estacionamientos (id INTEGER NOT NULL, idusuario INTEGER NOT NULL, patente TEXT NOT NULL, duracion INTEGER NOT NULL CHECK(duracion > 0), FOREIGN KEY(idusuario) REFERENCES Usuarios(id), PRIMARY KEY(id AUTOINCREMENT));";
+        String createTablaEstacionamientos = "CREATE TABLE Estacionamientos (id INTEGER NOT NULL, idusuario INTEGER NOT NULL, patente TEXT NOT NULL, duracion INTEGER NOT NULL CHECK(duracion > 0), estado INTEGER NOT NULL DEFAULT 1, FOREIGN KEY(idusuario) REFERENCES Usuarios(id), PRIMARY KEY(id AUTOINCREMENT));";
 
         sqLiteDatabase.execSQL(createTablaUsuarios);
         sqLiteDatabase.execSQL(createTablaLogins);
@@ -39,6 +39,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public long insert(String tabla, ContentValues valores){
         return this.getWritableDatabase().insert(tabla, null, valores);
+    }
+
+    public int update(String tabla, ContentValues valores, String whereClause, String[] whereParameters){
+        return this.getWritableDatabase().update(tabla, valores, whereClause, whereParameters);
     }
 
     public Cursor select(String tabla, String[] columnas, String whereClause, String[] whereParameters, String groupByClause, String havingClause, String orderByClause){
