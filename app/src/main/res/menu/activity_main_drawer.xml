@@ -12,5 +12,9 @@
             android:id="@+id/nav_micuenta"
             android:icon="@drawable/iconmonstr_id_card_5_24"
             android:title="@string/menu_account" />
+        <item
+            android:id="@+id/nav_creditos"
+            android:icon="@android:drawable/btn_star"
+            android:title="Créditos" />
     </group>
 </menu>

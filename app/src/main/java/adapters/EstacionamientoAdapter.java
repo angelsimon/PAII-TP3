@@ -1,6 +1,7 @@
 package adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class EstacionamientoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup parent) {
+
         LayoutInflater inflater= LayoutInflater.from(parent.getContext());
         View vista = view;
         if (vista == null){
@@ -48,11 +50,15 @@ public class EstacionamientoAdapter extends BaseAdapter {
 
         TextView patente = (TextView) vista.findViewById(R.id.txtPatente);
         TextView tiempo = (TextView) vista.findViewById(R.id.txtTiempo);
-
-
         patente.setText(getItem(i).getPatente());
-        tiempo.setText(getItem(i).getDuracion().toString());
+        tiempo.setText(getItem(i).getDuracion().toString() + " minutos");
+
+        /// Código para que aparezcan los estacionamientos eliminados como baja lógica
+        /*if (getItem(i).getEstado() == false){
+            vista.findViewById(R.id.card).setBackgroundColor(Color.argb(25, 255, 0,0));
+        }*/
 
         return vista;
     }
+
 }

@@ -57,7 +57,7 @@ public class EstacionamientoDAO {
             String[] whereParams = new String[]{String.valueOf(IDUsuario)};
             Cursor c = db.select("Estacionamientos",
                     columnas,
-                    "idusuario = ?",
+                    "idusuario = ? and estado = 1",
                     whereParams,
                     null,
                     null,

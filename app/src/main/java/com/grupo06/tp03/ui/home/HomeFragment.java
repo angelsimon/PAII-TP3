@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import models.UsuarioModel;
 public class HomeFragment extends Fragment {
     private ArrayList<EstacionamientoModel> lista;
     private GridView grilla;
+    private EstacionamientoAdapter adaptador;
     private HomeViewModel homeViewModel;
     FragmentManager fm = getFragmentManager();
 
@@ -53,9 +55,25 @@ public class HomeFragment extends Fragment {
         });
         bindData(root.getContext());
         grilla = (GridView) root.findViewById(R.id.grdEstacionamientos);
-        EstacionamientoAdapter adaptador = new EstacionamientoAdapter(lista, root.getContext());
+        adaptador = new EstacionamientoAdapter(lista, root.getContext());
         grilla.setAdapter(adaptador);
+        grilla.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                return removeEstacionamiento(i, view);
+            }
+        });
         return root;
+    }
+
+    private Boolean removeEstacionamiento(int i, View view){
+        EstacionamientoController controller = new EstacionamientoController(view.getContext());
+        if (controller.delete(lista.get(i).getId())) {
+            lista.remove(i);
+            adaptador.notifyDataSetChanged();
+            Toast.makeText(view.getContext(), "Registro eliminado", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     private void bindData(Context ctx){
