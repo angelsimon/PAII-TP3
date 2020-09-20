@@ -64,6 +64,7 @@ public class RegistrarActivity extends AppCompatActivity {
             if (this.validate()) {
                 if (UsuarioController.guardar(bindData(), this)) {
                     Toast.makeText(RegistrarActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     if (UsuarioController.getByUsername(txtNombreUsuario.getText().toString(), this) != null) {
                         Toast.makeText(RegistrarActivity.this, this.getString(R.string.ya_existe_usuario), Toast.LENGTH_LONG).show();
