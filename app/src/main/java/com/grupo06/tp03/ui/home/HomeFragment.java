@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -35,7 +37,7 @@ public class HomeFragment extends Fragment {
     private GridView grilla;
     private EstacionamientoAdapter adaptador;
     private HomeViewModel homeViewModel;
-    FragmentManager fm = getFragmentManager();
+    FragmentManager fm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +45,13 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        try
+        {
+            fm = getParentFragmentManager();
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
 
         FloatingActionButton btn = root.findViewById(R.id.btnNuevoEstacionamiento);
         btn.setOnClickListener(new View.OnClickListener() {
