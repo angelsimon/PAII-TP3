@@ -29,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, RegistrarActivity.class);
         startActivity(i);
     }
-
+    private void resetForm(){
+        txtNombre.setText("");
+        txtClave.setText("");
+    }
     public void btnIniciar_Click(View view){
         /*
         if (validador.Vacio(txtNombre)){
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(this, AppActivity.class);
                         i.putExtra("Usuario", user);
                         startActivity(i);
+                        resetForm();
                     }
                     else{
                         Toast.makeText(this, this.getString(R.string.no_existe_usuario), Toast.LENGTH_LONG).show();
