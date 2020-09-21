@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import classes.Validaciones;
 import controllers.UsuarioController;
 import models.UsuarioModel;
 
@@ -59,15 +60,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean validate(){
-    //ToDo
-    //Ver de usar la clase Validaciones
-        if ((txtNombre.getText().toString().trim() == "") || (txtClave.getText().toString().trim() == "")){
-            Toast.makeText(this, this.getString(R.string.campos_vacios), Toast.LENGTH_LONG).show();
+        if (Validaciones.esVacio(txtNombre.getText().toString())){
+            Toast.makeText(this, "El nombre de usuario no puede ser vacío", Toast.LENGTH_LONG).show();
+            txtNombre.requestFocus();
             return false;
         }
-        else{
-            return true;
+        if(Validaciones.esVacio(txtClave.getText().toString())){
+            Toast.makeText(this, "La clave no puede ser vacía", Toast.LENGTH_LONG).show();
+            txtClave.requestFocus();
+            return false;
         }
+        return true;
     }
 
     private void bindControls(){

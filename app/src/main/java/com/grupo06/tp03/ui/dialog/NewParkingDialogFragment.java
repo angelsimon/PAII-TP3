@@ -150,7 +150,7 @@ public class NewParkingDialogFragment extends DialogFragment {
                                 //NewParkingDialogFragment.this.getDialog().cancel();
                             }
                             else{
-                                //app.showToast("No se ha podido guardar el estacionamiento");
+                                app.showToast("No se ha podido guardar el estacionamiento");
                                 limpiarCampos();
                             }
                         }
