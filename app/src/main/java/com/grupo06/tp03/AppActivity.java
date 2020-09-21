@@ -105,4 +105,8 @@ public class AppActivity extends AppCompatActivity {
         return user;
     }
 
+    public void showToast(String msgText){
+        Toast.makeText(this, msgText, Toast.LENGTH_LONG).show();
+    }
+
 }
