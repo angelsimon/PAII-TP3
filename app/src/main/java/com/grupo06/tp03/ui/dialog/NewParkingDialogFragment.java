@@ -39,10 +39,34 @@ public class NewParkingDialogFragment extends DialogFragment {
     private EstacionamientoModel estacionamiento;
     private EstacionamientoController controlador;
     private AppActivity app;
+    private NewParkingDialogListener listener;
 
     public static NewParkingDialogFragment newInstance() {
         return new NewParkingDialogFragment();
     }
+
+    public interface NewParkingDialogListener {
+        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogNegativeClick(DialogFragment dialog);
+    }
+
+    public void setListener(NewParkingDialogListener listener){
+        this.listener = listener;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Verify that the host activity implements the callback interface
+        try {
+            listener = (NewParkingDialogListener) context;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            //Toast.makeText(this.getContext(), "No implementa", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -69,12 +93,39 @@ public class NewParkingDialogFragment extends DialogFragment {
         builder.setView(inflater.inflate(R.layout.new_parking_dialog_fragment, null));
         //builder.setTitle("Registrar estacionamiento");
         //builder.setPositiveButton("REGISTRAR", new DialogInterface.OnClickListener() {
-        builder.setPositiveButton("REGISTRAR", null);
+        /*builder.setPositiveButton("REGISTRAR", null);
         builder.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         NewParkingDialogFragment.this.getDialog().cancel();
                     }
-                });
+                });*/
+        // Add action buttons
+           builder.setPositiveButton("Registrar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    /*if (validate()){
+                        if(controlador.guardar(bindData())){
+                            app.showToast("El estacionamiento fue guardado con éxito");
+                            limpiarCampos();
+                            listener.onDialogPositiveClick(NewParkingDialogFragment.this);
+                            NewParkingDialogFragment.this.getDialog().dismiss();
+                            //NewParkingDialogFragment.this.getDialog().cancel();
+                        }
+                        else{
+                            //app.showToast("No se ha podido guardar el estacionamiento");
+                            limpiarCampos();
+                        }
+                    }*/
+                }
+            });
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    listener.onDialogNegativeClick(NewParkingDialogFragment.this);
+                    NewParkingDialogFragment.this.getDialog().cancel();
+                }
+            });
+
         final Dialog dialog = builder.create();
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
@@ -86,21 +137,24 @@ public class NewParkingDialogFragment extends DialogFragment {
                 txtPatente = (EditText) d.findViewById(R.id.txtPatente);
                 txtTiempo = (EditText) d.findViewById(R.id.txtTiempo);
                 Button b = ((AlertDialog)dialogShow).getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setText("Registrar");
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                            if (validate()){
-                                if(controlador.guardar(bindData())){
-                                    app.showToast("El estacionamiento fue guardado con éxito");
-                                    limpiarCampos();
-                                    NewParkingDialogFragment.this.getDialog().cancel();
-                                }
-                                else{
-                                    app.showToast("No se ha podido guardar el estacionamiento");
-                                    limpiarCampos();
-                                }
+                        if (validate()){
+                            if(controlador.guardar(bindData())){
+                                app.showToast("El estacionamiento fue guardado con éxito");
+                                limpiarCampos();
+                                listener.onDialogPositiveClick(NewParkingDialogFragment.this);
+                                NewParkingDialogFragment.this.getDialog().dismiss();
+                                //NewParkingDialogFragment.this.getDialog().cancel();
+                            }
+                            else{
+                                //app.showToast("No se ha podido guardar el estacionamiento");
+                                limpiarCampos();
                             }
                         }
+                    }
                 });
             }
         });

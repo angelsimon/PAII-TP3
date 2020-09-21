@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -32,7 +33,7 @@ import controllers.EstacionamientoController;
 import models.EstacionamientoModel;
 import models.UsuarioModel;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NewParkingDialogFragment.NewParkingDialogListener  {
     private ArrayList<EstacionamientoModel> lista;
     private GridView grilla;
     private EstacionamientoAdapter adaptador;
@@ -59,13 +60,12 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 //Snackbar.make(view, "Miau", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 NewParkingDialogFragment nuevoEst = new NewParkingDialogFragment();
+                nuevoEst.setListener(HomeFragment.this);
                 nuevoEst.show(fm, "prueba");
             }
         });
-        bindData(root.getContext());
         grilla = (GridView) root.findViewById(R.id.grdEstacionamientos);
-        adaptador = new EstacionamientoAdapter(lista, root.getContext());
-        grilla.setAdapter(adaptador);
+        updateGridView(root);
         grilla.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,6 +73,14 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+
+
+    public void updateGridView(View root){
+        bindData(root.getContext());
+        adaptador = new EstacionamientoAdapter(lista, root.getContext());
+        grilla.setAdapter(adaptador);
     }
 
     private Boolean removeEstacionamiento(int i, View view){
@@ -95,8 +103,17 @@ public class HomeFragment extends Fragment {
         catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
 
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        //Toast.makeText(this.getContext(), "Angel OK", Toast.LENGTH_SHORT).show();
+        updateGridView(this.getView());
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        //Toast.makeText(this.getContext(), "El dialog se cancelo", Toast.LENGTH_SHORT).show();
+    }
 }
