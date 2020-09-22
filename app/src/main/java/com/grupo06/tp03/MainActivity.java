@@ -9,8 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import classes.Validaciones;
+import controllers.LoginController;
 import controllers.UsuarioController;
+import models.LoginModel;
 import models.UsuarioModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
                 if(validate()) {
                     UsuarioModel user = UsuarioController.usuarioExiste(bindData(), this);
                     if(!(user.getId() == -1)){
+                        LoginModel login = new LoginModel();
+                        login.setIdUsuario(user.getId());
+                        login.setFechayHora(new Date());
+                        LoginController loginController = new LoginController(this);
+                        loginController.guardar(login);
                         Intent i = new Intent(this, AppActivity.class);
                         i.putExtra("Usuario", user);
                         startActivity(i);

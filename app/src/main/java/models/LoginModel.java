@@ -1,6 +1,9 @@
 package models;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LoginModel implements Serializable {
     private Long id;
@@ -33,8 +36,18 @@ public class LoginModel implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+    public String getFechaYHora(String Format){
+        Date d = new Date(this.fechaYhora);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Format);
+        return dateFormat.format(d);
+    }
+
     public Long getFechaYhora() {
         return fechaYhora;
+    }
+
+    public void setFechayHora(Date fechayHora){
+        this.fechaYhora = fechayHora.getTime();
     }
 
     public void setFechaYhora(Long fechaYhora) {

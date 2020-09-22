@@ -33,7 +33,7 @@ public class LoginDAO {
         try {
             DBHelper db = new DBHelper(ctx, "tp3.db", null, 1);
             db.abrir();
-            String[] columnas = new String[]{"TOP 5 *"};
+            String[] columnas = new String[]{"*"};
             String[] whereParams = new String[]{String.valueOf(IDUsuario)};
             Cursor c = db.select("Logins",
                     columnas,

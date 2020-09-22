@@ -13,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
@@ -49,10 +50,21 @@
                 android:layout_height="wrap_content"
                 android:minHeight="24dp" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Últimos logins"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:fontFamily="sans-serif-black" />
+
             <ListView
                 android:id="@+id/lstLogins"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="220dp"
+                android:foregroundGravity="center_horizontal"
+                android:scrollbars="vertical" />
         </LinearLayout>
     </ScrollView>
 
